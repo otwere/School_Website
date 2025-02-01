@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import { Menu, X, ChevronDown, User, BookOpen, Users, LogOut, Bell, Settings, GraduationCap, School, CalendarDays, Activity, Phone } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
+import logo from "../components/images/kristiansandschool-logo.png";
+
 const navLinks = [{
   name: "Home",
   path: "/",
@@ -205,16 +207,16 @@ const Navbar = () => {
           </div>)}
       </div>
     </div>;
-  return <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-md" : "bg-white/80 backdrop-blur-md"}`}>
+  return <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-gray-50 shadow-sm" : "bg-white/80 backdrop-blur-md"}`}>
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-3">
-              <img src="https://images.unsplash.com/photo-1585676623595-ca222755aa9b" alt="Academy School Logo" className="h-10 w-10 rounded-full" />
-              <span className="text-2xl font-serif font-bold text-navy-800">
-                Academy School
-              </span>
-            </Link>
+          <Link to="/" className="flex items-center space-x-3">
+          <img src={logo}alt="School Logo" className="h-10 " />
+      <span className="text-2xl font-serif font-bold text-blue-700">
+        Kristiansand School
+      </span>
+    </Link>
           </div>
           <div className="hidden md:flex items-center space-x-6">
             {navLinks.map(link => <div key={link.name} className="relative group" ref={el => dropdownRefs.current[link.name] = el} onMouseEnter={() => link.sections.length > 0 ? handleDropdownHover(link.name) : null} onMouseLeave={() => link.sections.length > 0 ? handleDropdownHover(null) : null}>

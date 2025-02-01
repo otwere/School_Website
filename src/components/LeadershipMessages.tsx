@@ -153,7 +153,7 @@ const LeadershipMessages = () => {
           <h3 className="text-3xl font-bold text-center mb-12 text-gray-900">
             Student Leaders Speak
           </h3>
-          <div className="relative bg-white rounded-2xl shadow-sm overflow-hidden">
+          <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 opacity-50"></div>
             <div className="relative p-8">
               <div className="transition-all duration-500 transform">
@@ -161,7 +161,7 @@ const LeadershipMessages = () => {
                   <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-sm">
                     <img src={studentMessages[activeSlide].image} alt={studentMessages[activeSlide].author} className="w-full h-full object-cover" />
                   </div>
-                </div>
+                </div> 
                 <div className="text-center">
                   <h4 className="text-xl font-bold">
                     {studentMessages[activeSlide].author}
