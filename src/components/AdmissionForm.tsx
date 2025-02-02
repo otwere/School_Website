@@ -26,10 +26,17 @@ const AdmissionForm = () => {
     birthCertificate: null as File | null,
     previousRecords: null as File | null,
     photo: null as File | null,
+    medicalReport: null as File | null,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  // Get current date for max date of birth
+  const getCurrentDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  };
 
   const validateStep = (currentStep: number) => {
     const newErrors: Record<string, string> = {};
@@ -43,11 +50,17 @@ const AdmissionForm = () => {
       if (!formData.parentName) newErrors.parentName = "Parent name is required";
       if (!formData.email) newErrors.email = "Email is required";
       if (!formData.phone) newErrors.phone = "Phone number is required";
+      if (formData.phone && !/^\d{10}$/.test(formData.phone)) {
+        newErrors.phone = "Phone number must be exactly 10 digits";
+      }
+      if (!formData.residentialArea) newErrors.residentialArea = "Residential area is required"; // New validation
+      if (!formData.commonLandmark) newErrors.commonLandmark = "Common landmark is required"; // New validation
     }
     if (currentStep === 4) {
       if (!formData.birthCertificate) newErrors.birthCertificate = "Birth certificate is required";
       if (!formData.previousRecords) newErrors.previousRecords = "Previous school records are required";
       if (!formData.photo) newErrors.photo = "Passport photo is required";
+      // Medical report is optional, so no validation needed
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -84,6 +97,14 @@ const AdmissionForm = () => {
     }
   };
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setFormData({
+      ...formData,
+      phone: value,
+    });
+  };
+
   const handlePrint = () => {
     window.print();
   };
@@ -91,38 +112,34 @@ const AdmissionForm = () => {
   if (isSuccess) {
     return (
       <BackgroundWrapper>
-     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div className="bg-white/90 rounded-2xl shadow-sm p-8 text-center relative">
-    
-    {/* Print Button positioned at the top right */}
-    <div className="absolute top-4 right-4">
-      <button
-        onClick={handlePrint}
-        className="flex items-center px-6 py-3  text-white rounded-lg transition-colors duration-200"
-      >
-        <Printer className="w-5 h-5 ml-2 text-gray-700 hover:text-blue-700" />
-        
-      </button>
-    </div>
+        <div className="max-w-4xl mt-10  mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-inherit border rounded-xl shadow-none p-8 text-center relative">
+            <div className="absolute top-4 right-4">
+              <button
+                onClick={handlePrint}
+                className="flex items-center px-6 py-3 text-white rounded-lg transition-colors duration-200"
+              >
+                <Printer className="w-5 h-5 ml-2 text-gray-700 hover:text-blue-700" />
+              </button>
+            </div>
 
-    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-      <Check className="w-8 h-8 text-green-600" />
-    </div>
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Check className="w-8 h-8 text-green-700" />
+            </div>
 
-    <h2 className="text-2xl font-bold mb-4 text-gray-800">
-      Application Submitted Successfully!
-    </h2>
-    <p className="text-gray-600 mb-6">
-      Thank you for your interest in our School. We will review your
-      Application and contact you soon.
-    </p>
-    <p className="text-lg text-blue-700 mb-6">
-      Application Reference Number : {" "}
-      {Math.random().toString(36).substr(2, 9).toUpperCase()}
-    </p>
-  </div>
-</div>
-
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">
+              Application Submitted Successfully!
+            </h2>
+            <p className="text-gray-600 mb-6">
+              Thank you for your interest in our School. We will review your
+              Application and contact you soon.
+            </p>
+            <p className="text-lg text-blue-700 mb-6">
+              Application Reference Number : {" "}
+              {Math.random().toString(36).substr(2, 9).toUpperCase()}
+            </p>
+          </div>
+        </div>
       </BackgroundWrapper>
     );
   }
@@ -161,7 +178,7 @@ const AdmissionForm = () => {
             </div>
           </div>
         </div>
-        <div className="bg-inherit border rounded-2xl shadow-lg p-8">
+        <div className="bg-inherit border rounded-2xl shadow-none p-8">
           <form onSubmit={handleSubmit}>
             {step === 1 && (
               <div className="space-y-6">
@@ -201,6 +218,7 @@ const AdmissionForm = () => {
                       <input
                         type="date"
                         value={formData.dateOfBirth}
+                        max={getCurrentDate()}
                         onChange={(e) =>
                           setFormData({
                             ...formData,
@@ -254,20 +272,13 @@ const AdmissionForm = () => {
                       } p-3`}
                     >
                       <option value="">Select Grade</option>
+                      <option value="pp1">Kindergarten (Play Group)</option>
                       <option value="pp1">Pre-Primary 1 (PP 1)</option>
                       <option value="pp2">Pre-Primary 2 (PP 2)</option>
                       <option value="g1">Grade 1</option>
                       <option value="g2">Grade 2</option>
                       <option value="g3">Grade 3</option>
                       <option value="g4">Grade 4</option>
-                      <option value="g1">Grade 5</option>
-                      <option value="g2">Grade 6</option>
-                      <option value="g3">Grade 7</option>
-                      <option value="g4">Grade 8</option>
-                      <option value="g4">Grade 9</option>
-                      <option value="g4">Grade 10</option>
-                      <option value="g4">Grade 11</option>
-                      <option value="g4">Grade 12</option>
                     </select>
                   </div>
                 </div>
@@ -295,7 +306,7 @@ const AdmissionForm = () => {
                         className={`pl-10 w-full rounded-lg border ${
                           errors.parentName ? "border-red-500" : "border-gray-300"
                         } p-3`}
-                        placeholder="Enter parent's name"
+                        placeholder="Enter Parent's | Guardian's name"
                       />
                     </div>
                   </div>
@@ -339,7 +350,7 @@ const AdmissionForm = () => {
                         className={`pl-10 w-full rounded-lg border ${
                           errors.email ? "border-red-500" : "border-gray-300"
                         } p-3`}
-                        placeholder="Enter email address"
+                        placeholder="Enter valid email address"
                       />
                     </div>
                   </div>
@@ -352,18 +363,68 @@ const AdmissionForm = () => {
                       <input
                         type="tel"
                         value={formData.phone}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            phone: e.target.value,
-                          })
-                        }
+                        onChange={handlePhoneChange}
                         className={`pl-10 w-full rounded-lg border ${
                           errors.phone ? "border-red-500" : "border-gray-300"
                         } p-3`}
-                        placeholder="Enter phone number"
+                        placeholder="Enter valid phone number"
+                        maxLength={10}
                       />
                     </div>
+                    {errors.phone && (
+                      <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                    )}
+                  </div>
+                </div>
+                {/* New Fields: Residential Area and Common Landmark */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Residential Area
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={formData.residentialArea}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            residentialArea: e.target.value,
+                          })
+                        }
+                        className={`w-full rounded-lg border ${
+                          errors.residentialArea ? "border-red-500" : "border-gray-300"
+                        } p-3`}
+                        placeholder="Enter residential area"
+                      />
+                    </div>
+                    {errors.residentialArea && (
+                      <p className="text-red-500 text-sm mt-1">{errors.residentialArea}</p>
+                    )}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Common Landmark
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={formData.commonLandmark}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            commonLandmark: e.target.value,
+                          })
+                        }
+                        className={`w-full rounded-lg border ${
+                          errors.commonLandmark ? "border-red-500" : "border-gray-300"
+                        } p-3`}
+                        placeholder="Enter a common landmark"
+                      />
+                    </div>
+                    {errors.commonLandmark && (
+                      <p className="text-red-500 text-sm mt-1">{errors.commonLandmark}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -490,6 +551,24 @@ const AdmissionForm = () => {
                     {errors.photo && (
                       <p className="text-red-500 text-sm mt-1">{errors.photo}</p>
                     )}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Medical Report (Optional)
+                    </label>
+                    <div className="relative border border-gray-300 rounded-lg p-4">
+                      <input
+                        type="file"
+                        onChange={(e) => handleFileChange(e, "medicalReport")}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      />
+                      <div className="flex items-center justify-center">
+                        <Upload className="w-5 h-5 text-gray-400 mr-2" />
+                        <span className="text-sm text-gray-500">
+                          {formData.medicalReport?.name || "Upload Medical Report (Optional)"}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

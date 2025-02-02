@@ -38,14 +38,26 @@ const ScheduleVisitModal: React.FC<ScheduleVisitModalProps> = ({
       return;
     }
 
+    // Validate the phone number
+    const phoneNumber = formData.phone.replace(/\D/g, ''); // Remove non-numeric characters
+    if (phoneNumber.length !== 10) {
+      toast.error("Phone number must be exactly 10 digits.");
+      return;
+    }
+
     // Handle form submission logic here
-    console.log("Form submitted:", formData);
+    console.log("Form submitted:", { ...formData, phone: phoneNumber });
     toast.success("Visit scheduled successfully!");
     
     // Reset form to initial state
     setFormData(initialFormData);
     
     onClose();
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const numericValue = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+    setFormData({ ...formData, phone: numericValue });
   };
 
   // Get today's date in YYYY-MM-DD format for the min attribute
@@ -66,10 +78,10 @@ const ScheduleVisitModal: React.FC<ScheduleVisitModalProps> = ({
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
-              className="bg-white rounded-2xl w-full max-w-2xl shadow-lg"
+              className="bg-gray-50 rounded-2xl w-full max-w-2xl shadow-none"
             >
               <div className="flex justify-between items-center p-6 border-b">
-                <h2 className="text-2xl font-bold text-gray-800">Schedule a Visit</h2>
+                <h2 className="text-xl font-bold text-gray-600 font-sans">Schedule a Visit</h2>
                 <button
                   onClick={onClose}
                   className="text-gray-500 hover:text-gray-700 transition-colors duration-200"
@@ -115,7 +127,8 @@ const ScheduleVisitModal: React.FC<ScheduleVisitModalProps> = ({
                         type="tel"
                         required
                         value={formData.phone}
-                        onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                        onChange={handlePhoneChange}
+                        maxLength={10}
                         className="pl-10 w-full rounded-lg border border-gray-300 p-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors duration-200"
                       />
                     </div>

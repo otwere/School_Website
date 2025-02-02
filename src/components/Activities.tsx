@@ -76,7 +76,7 @@ const Activities = () => {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {activities.map((activity, index) => <div key={index} className="bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-all duration-300 hover:bg-white group">
-                <div className="text-navy-800 mb-4 transform transition-transform group-hover:scale-110">
+                <div className="text-blue-500 mb-4 transform transition-transform group-hover:scale-110">
                   {activity.icon}
                 </div>
                 <h4 className="text-xl font-semibold mb-2">{activity.title}</h4>
