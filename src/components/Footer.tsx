@@ -45,11 +45,11 @@ const Footer = () => {
           <div>
             {/* Combined Logo and Text */}
             <Link
-              to="#"
+              to="/"
               className="flex items-center space-x-2 cursor-pointer"
               onClick={(e) => {
                 e.preventDefault(); // Prevent default anchor behavior
-                scrollToTop(); // Scroll to the top of the page
+                scrollToTop(); // Scroll to the top of the page/home
               }}
             >
               <img
@@ -57,11 +57,11 @@ const Footer = () => {
                 alt="Kristiansand School Logo"
                 className="w-14 h-auto"
               />
-              <h3 className="text-2xl font-semibold text-blue-700 font-serif">
+              <h3 className="text-2xl  font-semibold text-blue-700 font-serif">
                 Kristiansand School
               </h3>
             </Link>
-            <p className="text-gray-700 mt-2">Nurturing tomorrow's Leaders through Quality Education and Values.</p>
+            <p className="text-gray-700 mt-2">Nurturing tomorrow's Leaders through Quality Education , Technology Practices and Values.</p>
           </div>
           <div>
             <h3 className="text-xl font-semibold mb-4">Contact Us</h3>

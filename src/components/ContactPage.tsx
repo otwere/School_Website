@@ -68,7 +68,7 @@ const ContactPage = () => {
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Phone",
-      value: "+254 123 456 789",
+      value: "+254 700 520 008",
       hoverEffect: "hover:text-blue-600",
       type: "phone"
     },
@@ -89,7 +89,7 @@ const ContactPage = () => {
     {
       icon: <Clock className="w-6 h-6" />,
       title: "Office Hours",
-      value: "Monday - Friday : 8am - 5pm\nSaturday : 8am - 1pm",
+      value: "Monday - Friday : 8 : 00 AM - 5 : 00 PM\nSaturday : 8 : 00 AM - 2 : 30 PM\nSunday : Closed",
       hoverEffect: "hover:text-purple-600",
       type: "hours"
     }
@@ -187,8 +187,8 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <p className="font-medium text-gray-500">Admissions Team</p>
-                  <p className="text-gray-600">+254 789 012 345</p>
-                  <p className="text-gray-600">admissions@academyschool.com</p>
+                  <p className="text-gray-600">+254 700 520 008</p>
+                  <p className="text-gray-600 hover:text-blue-600">Email : admissions@academyschool.com</p>
                 </div>
               </div>
             </div>

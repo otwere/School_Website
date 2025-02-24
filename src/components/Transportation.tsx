@@ -34,7 +34,7 @@ const Transportation = () => {
             <img src="https://images.unsplash.com/photo-1557223562-6c77ef16210f" alt="School Bus" className="w-full h-full object-cover" />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {features.map((feature, index) => <div key={index} className="bg-gray-50 p-6 rounded-xl shadow-sm hover:bg-white hover:shadow-lg transition-shadow">
+            {features.map((feature, index) => <div key={index} className="bg-gray-50 p-6 rounded-xl shadow-none hover:bg-white hover:shadow-lg transition-shadow">
                 <div className="text-blue-600 mb-4">{feature.icon}</div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-600">{feature.description}</p>

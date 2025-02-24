@@ -159,7 +159,7 @@ const AdmissionsSection = () => {
                 </div>
               </div>)}
           </div>
-          <div className="bg-white/50 rounded-2xl shadow-sm p-8">
+          <div className="bg-gray-50 rounded-2xl shadow-sm p-8">
             <h4 className="text-2xl font-bold mb-6">
               {admissionSteps[activeStep - 1].title}
             </h4>

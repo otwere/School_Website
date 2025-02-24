@@ -60,11 +60,11 @@ const navLinks = [{
   name: "Admissions",
   path: "/#admissions",
   sections: [{
-    name: "How to Apply",
+    name: "How to Apply(Requirements)",
     path: "/#admissions",
     element: "admissions"
   }, {
-    name: "Apply Now",
+    name: "Apply Now ( Admission Form )",
     path: "/admission-form"
   }, {
     name: "Fee Structure",
