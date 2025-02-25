@@ -22,7 +22,7 @@ const LoginPage = () => {
     setIsLoading(true);
     try {
       await login(formData.email, formData.password, formData.role);
-      toast.success("Login successful! Directing you to your portal..", {
+      toast.success("Login successful! redirecting you to your portal..", {
         position: "top-right",
         autoClose: 2000,
       });
@@ -111,7 +111,7 @@ const LoginPage = () => {
                   className="mt-1 block w-full pl-3 pr-10 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="student">Student</option>
-                  <option value="staff">Staff</option>
+                  <option value="staff">Teacher</option>
                   <option value="parent">Parent</option>
                 </select>
               </motion.div>

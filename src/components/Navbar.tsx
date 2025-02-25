@@ -81,7 +81,7 @@ const portalLinks = [{
   path: "/student-portal",
   icon: <GraduationCap className="w-5 h-5" />
 }, {
-  name: "Staff Portal",
+  name: "Teacher Portal",
   path: "/staff-portal",
   icon: <School className="w-5 h-5" />
 }, {
@@ -184,7 +184,7 @@ const Navbar = () => {
   const renderDropdownContent = (link: (typeof navLinks)[0]) => {
     if (link.name === "Home") return null;
     return <div className="pt-2">
-      <div className="bg-white/80 rounded-xl shadow-lg py-2 border border-gray-100 ring-1 ring-black ring-opacity-5">
+      <div className="bg-gray-50 rounded-xl shadow-lg py-2 border border-gray-100 ring-1 ring-black ring-opacity-5">
         {link.sections.map(section => <button key={section.name} onClick={() => handleNavigation(section)} className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
           {section.name}
         </button>)}
