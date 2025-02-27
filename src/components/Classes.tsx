@@ -84,7 +84,7 @@ const Classes = () => {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {grades.map(grade => <div key={grade.name} className={`group relative   bg-gray-200/30  rounded-xl shadow-none hover:scale-95 hover:bg-slate-50  transition-all duration-300 overflow-hidden cursor-pointer border ${selectedGrade === grade.name ? "border-blue-500 ring-2 ring-blue-500 ring-opacity-50" : "border-transparent"}`} onClick={() => setSelectedGrade(selectedGrade === grade.name ? null : grade.name)}>
+          {grades.map(grade => <div key={grade.name} className={`group relative   bg-gray-200  rounded-xl shadow-none hover:scale-95 hover:bg-gray-100  transition-all duration-300 overflow-hidden cursor-pointer border ${selectedGrade === grade.name ? "border-blue-500 ring-2 ring-blue-500 ring-opacity-50" : "border-transparent"}`} onClick={() => setSelectedGrade(selectedGrade === grade.name ? null : grade.name)}>
               <div className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
